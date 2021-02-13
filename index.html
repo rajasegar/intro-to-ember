@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>CoE Syncup</title>
+    <title>Intro to Ember.js</title>
 
     <link rel="stylesheet" href="dist/reset.css">
     <link rel="stylesheet" href="dist/reveal.css">
@@ -12,14 +12,7 @@
 
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-<style>
-.yellow {
-  color: yellow;
-}
-.cyan {
-  color: cyan;
-}
-</style>
+    <link rel="stylesheet" href="examples/assets/styles.css">
   </head>
   <body>
     <div class="reveal">
@@ -27,152 +20,189 @@
         <section>
           <h2>Agenda</h2>
           <ul>
-            <li>Micro frontends (What is the way forward?)</li>
-            <li>Shall we make React JS as the standard for all new modules?</li> 
-            <li>Powering Micro frontends with the 3 BUs and Platforms</li> 
-            <li>Freshworks "Create Frontend Application" Generators</li> 
-            <li>Browser Deprecation IE11?</li> 
-            <li>Interview Handbook for Frontend!</li>
-            <li>Continuous Migration of Frameworks and Infrastructure!</li>
+            <li class="fragment">Introduction to Ember & Single Page Applications</li>
+            <li class="fragment">Ember project structure</li> 
+            <li class="fragment">Advanced Topics & Bonus content</li> 
           </ul>
         </section>
         <section>
-          <p> Micro frontends (What is the way forward?)</p>
+          <h1>Part-I</h1>
         </section>
         <section>
-          <p> Why Micro frontends? </p>
+          <p class="yellow"> What is Ember? </p>
+            <p class="fragment">MVC Javascript Framework</p>
+        </section>
+        <section>
+          <p class="yellow"> Ember vs Other JS frameworks </p>
+          <p class="fragment">React => Library for creating components</p>
+          <p class="fragment">Vue => Framework</p>
+          <p class="fragment">Ember == Angular</p>
+        </section>
+        <section>
+          <p class="yellow"> Why Ember? </p>
+            <p class="fragment">Ruby on Rails</p>
+            <p class="fragment">Strong conventions</p>
+            <p class="fragment">Developer Productivity</p>
+        </section>
+        <section>
+          <h1>SPA</h1>
+          <p class="fragment">Single Page Application</p>
+        </section>
+        <section>
+          <p>Components of SPA</p>
           <ul>
-            <li>Micro-Frontends is not the end goal</li>
-            <li>Unified Product experience</li>
-            <li>Independent Deployments</li>
-            <li>Team Autonomy</li>
-            <li>Framework Agnostic and Technology Heterogeneity</li>
-            <li>Consistency and Design standardization</li>
-          </ul> 
-        </section>
-        <section>
-          <section>
-            <p>  <span class="cyan">React.js</span> => standard for all new modules?  </p>
-          </section> 
-          <section>
-            <p>Why not Ember?</p>
-          </section>
-          <section>
-            <img src="/examples/assets/state-of-js-2020.png"/>
-            <p><a href="https://2020.stateofjs.com/en-US/technologies/front-end-frameworks/">State of JS 2020</a></p>
-          </section>
-          <section>
-            <p>There are <span class="yellow">lot of differences in opinion</span> within the Ember community itself</p>
-          </section> 
-          <section>
-            <p class="yellow">Pain points #1</p>
-            <ul>
-              <li>
-                Octane removed the ability to use the type attribute and being able to use attributes in component helpers in general
-              </li>
-              <li>
-                weird bugs because of the helper manager thing and others with old two way bindings no longer working
-              </li> 
-              <li>
-                destroyables changed how destroying worked, so you could no longer reliably destroy things in order, it just destroys at "some point" later
-              </li>
-              <li>
-                Using a string to call a component with angle brackets has been removed for future reasons
-              </li>
-            </ul>
-          </section>
-          <section>
-            <p class="yellow">Pain points #2</p>
-            <ul>
-              <li>
-                The way params work into helpers suddenly changed, they are no longer immutable or something
-              </li>
-              <li>
-                Removed observers (well recommended to) with no real replacement, lead to different types of hacks 
-              </li>
-              <li>
-                Back to attributes, basically useless feature now outside of the basics unless you use modifiers and change the DOM manually
-              </li>
-              <li>
-                Glimmer also made it so any template variable that was the same as a HTML element would be broken... this was not documented 
-              </li>
-            </ul>
-          </section>
-            <section>
-              <p>
-
-              this dismissal of people's felt needs stems from, <span class="yellow">Ember's history of paternalism. Since Ember 3.x and Octane, Ember's has gotten much less paternalistic</span> as it has started released primitives to unlock work instead of telling people to just wait until Ember figures it out. However, <span class="cyan">the paternalism doesn't seem fully excised and it shows up in subtle ways.</span>  
-              </p>
-            </section>
-            <section>
-              <p>
-              To really address the problems, Ember needs to take a pretty hard look at the needs Ember isn't meeting and meet them. Sure, regarding the survey, the stats are bad, the representation is terrible, people haven't heard about Octane, etc, etc, etc -- those are all ways of just dismissing the reality: by any modern metric, <span class="yellow">Ember is behind. We don't have production ready code splitting, we're not the fastest (or top tier), we're not the least memory (or top tier).</span> Sure, we have strengths (convention, etc), but shouting our strengths while ignoring the weaknesses doesn't help us address the needs.
-              </p>
-            </section>
-            <section>
-              <p>
-
-              <span class="yellow">If Ember is to ever fight back, it needs to rebrand when, and only when, it's actually delivering some business value that's immediately apparent and people can see for themselves and sell to their bosses.</span> E.g. We're top 10 fastest, smallest bundle size, out of the box SSR, easily integrate other components from React/Vue, etc -- something where people go, "oh, you might not be the most popular but you're solving problems better than other people are"
-
-              <p class="cyan">Merely focusing on our laurels isn't going to help us get there.</p>
-              </p>
-          </section>
-          <section>
-            it let people see <span class="yellow">this tool created business value immediately. With Ember, you can't create something of value immediately</span> -- you need to learn this and learn that and put this file and that file there. And then, what do you get? Nothing special that's not as good as anything else. And yes, octane has helped people make "hello world" much faster, but quickly doing "hello world" is just not enough. Now, we have to do more value than hello world. 
-             </section>
-             <section>
-
-               <span class="yellow">If you want to see an example of a framework immediately solving business problems, check out Next.js -- it solves so many problems for content sites and it's immediately apparent how it delivers that value (small bundle, fast loading, SWR, etc).</span> Ember needs to find values it uniquely solves that don't take building an app with 100+ components to realize you need. If the pitch for ember is "Bet your app on React and then in 3 years, you'll realize you were wrong!", we're not going to win. 
-             </section>
-             <section>
-
-               <span class="yellow">If I were to build our startup again, no way I'd use Ember -- it doesn't deliver any value that isn't trumped by the MUCH bigger ecosystem of React et al.</span> Ember needs to find that secret sauce. I think it could find it, but I haven't seen any evidence Ember has articulated something that in the next 2 years it will be able to do that will be better than what anyone else can do -- something that will make people risk their company on it.
-             </section>
-             <section>
-encourage people to put less time into blaming a survey and more time into really unpacking what else we need to do to be a tool worth risking your company on.
-
-<span class="yellow"> the conversation around rebranding is good, but by itself, I don't think it will move the needle (just as the release of Glimmer didn't).</span>
- 
-          </section>
-        </section>
-
-        <section>
-          <p> Powering Micro frontends with 3 BUs and Platforms</p>
-        </section>
-        <section>
-          <p class="yellow"> Freshworks "Create Frontend Application" Generators</p>
-          <ul>
-            <li>Re-inventing the wheel</li>
-            <li>Almost all frameworks has a CLI</li>
-            <li>Overhead of keeping the generators up-to-date with latest industry standards & best-practices</li>
+            <li class="fragment">Routing</li>
+            <li class="fragment">State management</li>
+            <li class="fragment">API & Data</li>
+            <li class="fragment">Templating</li>
+            <li class="fragment">Styling</li>
+            <li class="fragment">Build Pipeline</li>
           </ul>
         </section>
         <section>
+          <h2>Routing</h2>
+          <p class="fragment">Routing in the browser</p>
+          <p class="fragment">Client-side Routing</p>
+        </section>
+        <section>
+          <h2>Client-side routing</h2>
           <ul>
-            <li>Focus instead of identifying and recommending best practices and tools</li>
-            <li>Maybe an Ember Observer kind of thing for internal purposes for React, Ember and so on...</li>
+            <li class="fragment">Hash-based routing</li>
+            <li class="fragment">URL-based routing</li>
           </ul>
         </section>
         <section>
-          <p>React.js in Freshworks</p>
-          <p>
-          <a href="https://docs.google.com/spreadsheets/d/1SSVB8yUr13_9fpHuW9lkFJiZhQpou4VSMEcz-T1jNo0/edit?usp=sharing">React products</a>
-          </p>
+          <p>Hash-based routing</p>
+          <code class="fragment">
+            https://support.freshdesk.com/#tickets
+            https://support.freshdesk.com/#contacts
+          </code>
         </section>
         <section>
-          <p> Browser Deprecation IE11?</p>
+              <p class="yellow">Downsides of Hash-based routing</p>
+              <img src="examples/assets/one-does.jpg" height="200"/>
+              <ul>
+                <li class="fragment">Older Browsers</li>
+                <li class="fragment">Doesn't play well with Server side</li>
+                <li class="fragment">Small client-side only apps with no Backend</li>
+                <li class="fragment">Search Engine Indexing & SEO</li>
+                <li class="fragment">Server Side Rendering</li>
+              </ul>
         </section>
         <section>
-          <p> Interview Handbook for Frontend</p>
-          <ul>
-            <li><a href="https://docs.google.com/spreadsheets/d/11OS61G_9GpJZ1D9vYwquuoCAZPwMhndfh1NEMQ7Tyqk/edit?usp=sharing">Frontend Competency Matrix</a></li>
-            <li><a href="https://docs.google.com/document/d/1HG2y94kw8MnjvxMKZytS3DR5CA5e9B77J0-T2f-TUTs/edit?usp=sharing">Frontend Competency Matrix - Optimization Patterns & Web concepts</a></li>
-            <li><a href="https://paper.dropbox.com/doc/Freshdesk-Skill-Matrix--BELyK4c1ZXw3ZFsIE66tYwwrAQ-1DuMw3Iv46Yiv1m8ZKwSL">Freshdesk Skill Matrix</a></li>
-          </ul>
+          <p>URL-based routing</p>
+          <code class="fragment">
+            https://support.freshdesk.com/tickets
+            https://support.freshdesk.com/contacts
+          </code>
         </section>
         <section>
-          <p> Continuous Migration of Frameworks & Infra</p>
+          <p class="yellow">History API</p>
+          <p>Manipulate the user's browsing history</p>
+          <img src="examples/assets/browser-history.jpg" height="300"/>
         </section>
+        <section>
+          <p class="yellow">History API</p>
+          <table class="small-font">
+            <tr>
+              <td>
+                back()
+              </td>
+              <td>
+                Goes to the previous page in the history.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                forward()
+              </td>
+              <td>
+                Goes to the next page in the history.
+              </td>
+            </tr>
+            <tr><td>
+                go(index)</td>
+              <td>
+                Goes to a specific page in the history.
+              </td>
+            </tr>
+            <tr><td>
+                pushState(state, title, URL)</td>
+              <td>
+                Pushes the data in the history stack and navigate to the provided URL.
+              </td>
+            </tr>
+            <tr><td>
+                replaceState(state, title, URL)
+              </td><td>
+                Replaces the most recent data in the history stack and navigates to the provided URL.
+              </td>
+            </tr>
+          </table> 
+          </section>
+          <section>
+            <p>State management</p>
+            <p>Internal State</p>
+            <p>External State</p>
+          </section>
+          <section>
+            <p>API & Data</p>
+          </section>
+
+          <section>
+            <p>Templating</p>
+            <p>Handlebars</p>
+            <p>Helpers</p>
+            <p>outlet</p>
+            <p>yield</p>
+          </section>
+          <section>
+            <p>Styling</p>
+          </section>
+          <section>
+            <p>Build Pipeline</p>
+          </section>
+        <section>
+          <h1>Part-II</h1>
+        </section>
+        <section>
+          <p>Creating Ember projects</p>
+        </section>
+        <section>
+          <p class="yellow">ember-cli</p>
+          <p class="fragment">Official CLI for creating & managing Ember.js apps</p>
+          <div class="fragment">
+          <code>
+            npm install --global ember-cli
+          </code>
+          </div>
+        </section> 
+        <section>
+          <h1>Part-III</h1>
+        </section> 
+        <section>
+          <p>Ember Addons</p>
+          <p>Generating new Ember addon</p>
+          <p>Dummy app</p>
+          <p>Addon structure</p>
+        </section>
+        <section>
+          <p>Ember Observer</p>
+          <p><a href="https://emberobserver.com">ember-observer</a></p>
+        </section>
+        <section>
+          <p>ember-auto-import</p>
+        </section>
+        <section>
+          <p>ember-new-output</p>
+        </section>
+        <section>
+          <p>Code splitting</p>
+        </section>
+        <section>
+          <p>Ember Engines</p>
+        </section>
+
       </div>
     </div>
 
