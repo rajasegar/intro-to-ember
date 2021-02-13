@@ -18,6 +18,9 @@
     <div class="reveal">
       <div class="slides">
         <section>
+          <h1>Introduction to Ember</h1>
+        </section>
+        <section>
           <h2>Agenda</h2>
           <ul>
             <li class="fragment">Introduction to Ember & Single Page Applications</li>
@@ -36,6 +39,17 @@
           <p class="yellow"> Ember vs Other JS frameworks </p>
           <p class="fragment">React => Library for creating components</p>
           <p class="fragment">Vue => Framework</p>
+        </section>
+        <section>
+          <p class="yellow">Frameworks vs Libraries</p>
+          <p class="fragment">A framework calls your code. Your code calls a library.</p>
+          <div class="fragment">
+            <img src="examples/assets/Framework-vs-Lib.png"/>
+          </div>
+        </section>
+        <section>
+          <p class="yellow">So Ember.js is a Framework</p>
+          <p class="cyan">and React is a Library</p>
           <p class="fragment">Ember == Angular</p>
         </section>
         <section>
@@ -77,6 +91,12 @@
             https://support.freshdesk.com/#tickets
             https://support.freshdesk.com/#contacts
           </code>
+        </section>
+         <section>
+          <p class="yellow">Fragment Identifiers</p>
+          <p class="fragment fade-up cyan">Part of the URL beginning with and following the # symbol</p>
+          <p class="fragment">URL = http://google.com#cool-feature</p>
+          <p class="fragment">Fragment Id = #cool-feature</p>
         </section>
         <section>
               <p class="yellow">Downsides of Hash-based routing</p>
@@ -140,27 +160,208 @@
             </tr>
           </table> 
           </section>
-          <section>
-            <p>State management</p>
-            <p>Internal State</p>
-            <p>External State</p>
-          </section>
-          <section>
-            <p>API & Data</p>
+            <section>
+            <p class="yellow">Routing in Ember</p>
+            <div class="fragment">
+            <pre><code>
+// Hash based routing
+ENV.locationType = "hash";
+            </code></pre></div>
+            <div class="fragment">
+            <pre><code>
+// URL based routing
+ENV.locationType = "history";
+            </code></pre></div>
+            <div class="fragment">
+              <p>Automatic routing</p> 
+            <pre><code>
+// Modern Browsers => History API 
+// Older Browsers => Hash based routing
+ENV.locationType = "auto";
+            </code></pre>
+            </div>
           </section>
 
           <section>
+            <p class="yellow">State management</p>
+            <p class="fragment">Internal State</p>
+            <p class="fragment">External State</p>
+          </section>
+          <section>
+            <p class="yellow">Internal State</p>
+            <p>State within the context of a single component</p>
+            <ul>
+              <li>Computed Properties</li>
+              <li>Tracked Properties</li>
+            </ul>
+          </section>
+          <section>
+            <p>Computed Properties</p>
+            <pre class="fragment">
+            <code data-line-numbers>
+import EmberObject, { computed } from '@ember/object';
+
+const Image = EmberObject.extend({
+  aspectRatio: computed('width', 'height', function() {
+    return this.width / this.height;
+  }),
+});
+
+            </code>
+            </pre>
+          </section>
+          <section>
+            <p>Tracked Properties</p>
+            <pre class="fragment">
+            <code data-line-numbers>
+import { tracked } from '@glimmer/tracking';
+
+class Image {
+  @tracked width;
+  @tracked height;
+
+  get aspectRatio() {
+    return this.width / this.height;
+  }
+}
+            </code>
+            </pre>
+          </section>
+          <section>
+            <p class="yellow">External State</p>
+            <p>State within the context of whole application</p>
+            <p>involving multiple components</p>
+            <p class="fragment">In React, we use Redux, MobX</p>
+            <p class="fragment">In Ember, we use Services, Utils, Mixins along with Ember Data</p>
+          </section>
+          <section>
+            <p class="yellow">API & Data</p>
+            <p class="fragment">Ember Data</p>
+            <p class="fragment">a powerful set of tools for formatting requests, normalizing responses, and efficiently managing a local cache of data.</p>
+          </section>
+          <section>
+            <p>Ember works with any type of backend</p>
+            <p class="fragment">REST</p>
+            <p class="fragment">JSON:API</p>
+            <p class="fragment">GraphQL</p>
+          </section>
+          <section>
+            <p>Models</p>
+            <pre class="fragment">
+            <code data-line-numbers>
+import Model, { attr } from '@ember-data/model';
+
+export default class PersonModel extends Model {
+  @attr('string') name;
+  @attr('date') birthday;
+}
+            </code>
+            </pre>
+          </section> 
+          <section>
+            <p>Relationships</p>
+            <pre class="fragment">
+            <code data-line-numbers>
+import Model, { hasMany } from '@ember-data/model';
+
+export default class OrderModel extends Model {
+  @hasMany('line-item') lineItems;
+}
+            </code>
+            </pre>
+            <pre class="fragment">
+            <code data-line-numbers>
+import Model, { belongsTo } from '@ember-data/model';
+
+export default class LineItemModel extends Model {
+  @belongsTo('order') order;
+}
+            </code>
+            </pre>
+          </section> 
+          <section>
+            <p class="yellow">Records</p>
+            <p class="fragment"> an instance of a model that contains data loaded from a server.</p>
+            <pre class="fragment">
+            <code>
+this.store.findRecord('person', 1); 
+// => { id: 1, name: 'tony-stark' }
+            </code>
+            </pre>
+            </section> 
+            <section>
+              <p>Finding a record</p>
+              <img src="https://guides.emberjs.com/images/guides/models/finding-unloaded-record-step1-diagram.png"/>
+            </section>
+            <section>
+              <p>Finding a record (response)</p>
+              <img src="https://guides.emberjs.com/images/guides/models/finding-unloaded-record-step2-diagram.png"/>
+            </section>
+            <section>
+              <p>Peek record</p>
+              <img src="https://guides.emberjs.com/images/guides/models/finding-loaded-record-diagram.png"/>
+            </section>
+          <section>
             <p>Templating</p>
-            <p>Handlebars</p>
-            <p>Helpers</p>
-            <p>outlet</p>
-            <p>yield</p>
+            <p>Dynamic value interpolation in your HTML</p>
+            <pre>
+            <code>
+            <script type="text/template">
+              <p>My name is {{fullName}}</p>
+            </script>
+            </code>
+            </pre>
           </section>
           <section>
-            <p>Styling</p>
+            <p>HTMLBars</p>
+            <p>Based on the <a href="https://handlebarsjs.com">Handlebars</a> templating language</p>
+            <pre>
+            <code>
+              <script type="text/template">
+                <p>{{firstname}} {{lastname}}</p>
+              </script>
+            </code>
+            </pre>
           </section>
           <section>
-            <p>Build Pipeline</p>
+            <p class="yellow">Template helpers</p>
+            <p class="fragment">Helper functions are JavaScript functions that you can call from your template.</p>
+            <code class="fragment">
+              Account Details:
+              Given Name: {{capitalize this.person.givenName}}
+              Family Name: {{capitalize this.person.familyName}}
+            </code>
+          </section>
+          <section>
+            <p class="yellow">{{yield}}</p>
+            <p class="fragment">denotes an area of a template that will be rendered inside of another template.</p>
+          </section>
+
+          <section>
+            <p class="yellow">{{outlet}}</p>
+            <p class="fragment">lets you specify where a child route will render in your template.</p>
+          </section>
+          <section>
+            <p class="yellow">Styling</p>
+            <p class="fragment">CSS</p>
+            <p class="fragment">CSS Precompilers</p>
+            <ul class="fragment">
+              <li>Sass</li>
+              <li>LESS</li>
+              <li>PostCss</li>
+            </ul>
+          </section>
+          <section>
+            <p class="yellow">Build Pipeline</p>
+            <p class="fragment">Broccoli</p>
+            <p class="fragment cyan">Module Bundlers</p>
+            <ul>
+              <li class="fragment"><a href="https://webpack.js.org" target="_blank">Webpack</a></li>
+              <li class="fragment"><a href="https://rollupjs.org" target="_blank">Rollup</a></li>
+              <li class="fragment"><a href="https://parceljs.org" target="_blank">Parcel</a></li>
+              <li class="fragment"><a href="https://snowpack.dev" target="_blank">Snowpack</a></li>
+              <li class="fragment"><a href="https://esbuild.github.io" target="_blank">esbuild</a></li>
+            </ul>
           </section>
         <section>
           <h1>Part-II</h1>
@@ -178,29 +379,92 @@
           </div>
         </section> 
         <section>
+          <p class="yellow">ember new</p>
+          <p>
+          <code>
+            ember new [project-name]
+          </code>
+          </p>
+          <p class="fragment">
+          <code>
+            ember new my-project
+          </code>
+          </p>
+          <p class="fragment">
+          <code>
+            ember new my-project --yarn
+          </code>
+          </p>
+        </section>
+        <section>
+          <p>Package Managers</p>
+          <ul>
+            <li><a href="https://npmjs.com" target="_blank">npm</a></li>
+            <li><a href="https://yarnpkg.com" target="_blank" >yarn</a></li>
+            <li><a href="https://pnpm.js.org" target="_blank">pnpm</a></li>
+          </ul>
+        </section>
+        <section>
           <h1>Part-III</h1>
         </section> 
         <section>
-          <p>Ember Addons</p>
-          <p>Generating new Ember addon</p>
-          <p>Dummy app</p>
-          <p>Addon structure</p>
+          <p>How do I distribute reusable code with Ember?</p>
+          <p class="fragment">Ember Addons</p>
+        </section> 
+        <section>
+          <p class="yellow">Ember Addons</p>
+          <p class="fragment">Ember CLI provides a common format called Ember Addons for distributing reusable libraries to solve some of these problems.</p>
+          <p class="fragment">
+          Addons are JavaScript packages that integrate with Ember.
+          </p>
+          <pre class="fragment">
+          <code>ember install ember-cli-sass</code>
+          </pre>
         </section>
+        <section>
+          <p>Generating new Ember addon</p>
+          <pre>
+          <code>ember addon [addon-name]</code>
+          </pre>
+        </section> 
+        <section>
+          <p>Addon structure</p>
+        </section> 
         <section>
           <p>Ember Observer</p>
           <p><a href="https://emberobserver.com">ember-observer</a></p>
+          <p>One place to find awesome ember addons</p>
         </section>
         <section>
-          <p>ember-auto-import</p>
+          <p><a href="https://github.com/ef4/ember-auto-import" target="_blank">ember-auto-import</a></p>
+          <p>Zero config import from npm packages</p>
         </section>
         <section>
-          <p>ember-new-output</p>
+          <p class="yellow">ember-new-output</p>
+          <p class="fragment">To quickly setup up projects with different Ember versions</p>
+          <pre class="fragment">
+          <code> degit ember-cli/ember-new-output#v2.18 [project-name] </code>
+          </pre>
+          <div class="fragment">
+          <p><a href="https://github.com/Rich-Harris/degit" target="_blank">degit</a></p>
+          <p><a href="https://github.com/ember-cli/ember-new-output" target="_blank">ember-new-output</a></p>
+          </div>
         </section>
         <section>
           <p>Code splitting</p>
+          <p class="fragment">Performance</p>
         </section>
         <section>
-          <p>Ember Engines</p>
+          <p class="yellow">Ember Engines</p>
+          <p class="fragment">
+          Composable applications for ambitious user experiences.
+          </p>
+          <p class="fragment">Engines are just glorified Ember addons</p>
+          <ul class="fragment">
+            <li>Isolation</li>
+            <li>Routable vs Routeless</li>
+            <li>Lazy loading</li>
+          </ul>
         </section>
 
       </div>
