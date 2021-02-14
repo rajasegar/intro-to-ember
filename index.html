@@ -18,10 +18,11 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          <h1>Introduction to Ember</h1>
+          <h1>Introduction to </h1>
+          <img src="examples/assets/tomster.png" height="300"/>
         </section>
         <section>
-          <h2>Agenda</h2>
+          <h2><img src="examples/assets/agenda.png"/ height="100" style="vertical-align:text-top">Agenda</h2>
           <ul>
             <li class="fragment">Introduction to Ember & Single Page Applications</li>
             <li class="fragment">Ember project structure</li> 
@@ -34,6 +35,9 @@
         <section>
           <p class="yellow"> What is Ember? </p>
             <p class="fragment">MVC Javascript Framework</p>
+        </section>
+        <section>
+          <img src="examples/assets/ember-history.jpg"/>
         </section>
         <section>
           <p class="yellow"> Ember vs Other JS frameworks </p>
@@ -70,7 +74,6 @@
             <li class="fragment">API & Data</li>
             <li class="fragment">Templating</li>
             <li class="fragment">Styling</li>
-            <li class="fragment">Build Pipeline</li>
           </ul>
         </section>
         <section>
@@ -122,7 +125,7 @@
           <img src="examples/assets/browser-history.jpg" height="300"/>
         </section>
         <section>
-          <p class="yellow">History API</p>
+          <p class="yellow">window.history</p>
           <table class="small-font">
             <tr>
               <td>
@@ -241,10 +244,11 @@ class Image {
           </section>
           <section>
             <p>Ember works with any type of backend</p>
-            <p class="fragment">REST</p>
-            <p class="fragment">JSON:API</p>
-            <p class="fragment">GraphQL</p>
+            <p class="fragment"><a href="https://restfulapi.net/" target="_blank">REST</a></p>
+            <p class="fragment"><a href="https://jsonapi.org/" target="_blank">JSON:API</a></p>
+            <p class="fragment"><a href="https://graphql.org/" target="_blank">GraphQL</a></p>
           </section>
+
           <section>
             <p>Models</p>
             <pre class="fragment">
@@ -279,6 +283,14 @@ export default class LineItemModel extends Model {
             </code>
             </pre>
           </section> 
+          <section>
+            <h3 class="yellow">Store</h3>
+            <p class="fragment">Single Source of Truth</p>
+            <ul>
+              <li class="fragment">the central repository of models in your application.               </li>
+              <li class="fragment">Routes and their corresponding controllers can ask the store for models, and the store is responsible for knowing how to fetch them</li>
+            </ul>
+          </section>
           <section>
             <p class="yellow">Records</p>
             <p class="fragment"> an instance of a model that contains data loaded from a server.</p>
@@ -326,20 +338,61 @@ this.store.findRecord('person', 1);
           <section>
             <p class="yellow">Template helpers</p>
             <p class="fragment">Helper functions are JavaScript functions that you can call from your template.</p>
+            <pre>
             <code class="fragment">
-              Account Details:
-              Given Name: {{capitalize this.person.givenName}}
-              Family Name: {{capitalize this.person.familyName}}
+Given Name: {{capitalize this.person.givenName}}
+Family Name: {{capitalize this.person.familyName}}
             </code>
+            </pre>
           </section>
           <section>
             <p class="yellow">{{yield}}</p>
             <p class="fragment">denotes an area of a template that will be rendered inside of another template.</p>
+            <pre class="fragment">
+            <code data-line-numbers>
+            <script type="text/template"><LabeledTextfield @value={{@model.name}}>
+  First name:
+</LabeledTextfield>
+            </script>
+            </code>
+            </pre>
+            <pre class="fragment">
+            <code data-line-numbers>
+            <script type="text/template"><label>
+  {{yield}} <Input @value={{@value}} />
+</label>
+            </script>
+            </code>
+            </pre>
+          </section>
+          <section>
+            <pre>
+            <code>
+            <script type="text/template">
+<label>
+  First name: <input type="text" />
+</label>
+            </script>
+            </code>
+            </pre>
+
           </section>
 
           <section>
             <p class="yellow">{{outlet}}</p>
             <p class="fragment">lets you specify where a child route will render in your template.</p>
+            <pre class="fragment">
+            <code data-line-numbers>
+            <script type="text/template"><MyHeader />
+<div class="my-dynamic-content">
+  <!-- this content will change based on the current route, 
+  which depends on the current URL -->
+  {{outlet}}
+</div>
+
+<MyFooter />
+</script> 
+            </code>
           </section>
           <section>
             <p class="yellow">Styling</p>
@@ -353,7 +406,7 @@ this.store.findRecord('person', 1);
           </section>
           <section>
             <p class="yellow">Build Pipeline</p>
-            <p class="fragment">Broccoli</p>
+            <p class="fragment"><a href="https://broccoli.build/" target="_blank">Broccoli</a></p>
             <p class="fragment cyan">Module Bundlers</p>
             <ul>
               <li class="fragment"><a href="https://webpack.js.org" target="_blank">Webpack</a></li>
@@ -370,7 +423,7 @@ this.store.findRecord('person', 1);
           <p>Creating Ember projects</p>
         </section>
         <section>
-          <p class="yellow">ember-cli</p>
+          <img src="examples/assets/ember-cli.png"/>
           <p class="fragment">Official CLI for creating & managing Ember.js apps</p>
           <div class="fragment">
           <code>
@@ -405,6 +458,34 @@ this.store.findRecord('person', 1);
           </ul>
         </section>
         <section>
+          <p class="yellow">Skip npm install</p>
+          <code>
+            ember new my-project --skip-npm
+          </code>
+        </section>
+        <section>
+          <p class="yellow">Skip git init</p>
+          <code>
+            ember new my-project --skip-git
+          </code>
+        </section>
+        <section>
+          <p class="yellow">More options</p>
+          <pre>
+          <code>
+            ember help
+          </code>
+          </pre>
+          <pre class="fragment">
+          <code>
+            ember help new
+          </code>
+          </pre>
+        </section>
+        <section>
+          <img src="examples/assets/demo.png"/>
+        </section>
+        <section>
           <h1>Part-III</h1>
         </section> 
         <section>
@@ -413,7 +494,7 @@ this.store.findRecord('person', 1);
         </section> 
         <section>
           <p class="yellow">Ember Addons</p>
-          <p class="fragment">Ember CLI provides a common format called Ember Addons for distributing reusable libraries to solve some of these problems.</p>
+          <p class="fragment">Ember CLI provides a common format called Ember Addons for distributing reusable libraries.</p>
           <p class="fragment">
           Addons are JavaScript packages that integrate with Ember.
           </p>
@@ -442,17 +523,19 @@ this.store.findRecord('person', 1);
         <section>
           <p class="yellow">ember-new-output</p>
           <p class="fragment">To quickly setup up projects with different Ember versions</p>
-          <pre class="fragment">
-          <code> degit ember-cli/ember-new-output#v2.18 [project-name] </code>
-          </pre>
           <div class="fragment">
           <p><a href="https://github.com/Rich-Harris/degit" target="_blank">degit</a></p>
           <p><a href="https://github.com/ember-cli/ember-new-output" target="_blank">ember-new-output</a></p>
           </div>
+
+          <pre class="fragment">
+          <code> degit ember-cli/ember-new-output#v2.18 [project-name] </code>
+          </pre>
         </section>
         <section>
           <p>Code splitting</p>
           <p class="fragment">Performance</p>
+          <p class="fragment">Shipping unused code in the browser</p>
         </section>
         <section>
           <p class="yellow">Ember Engines</p>
@@ -465,6 +548,14 @@ this.store.findRecord('person', 1);
             <li>Routable vs Routeless</li>
             <li>Lazy loading</li>
           </ul>
+        </section>
+        <section>
+          <h3>Stuck? Lost? Get help from the Community</h3>
+          <p><a href="https://discuss.emberjs.com" target="_blank">Ember Discussion Forum</a></p>
+          <p><a href="https://discord.gg/emberjs" target="_blank">Ember Community Discord</a></p>
+        </section>
+        <section>
+          <h2>Questions?</h2>
         </section>
 
       </div>
