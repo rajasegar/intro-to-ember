@@ -305,12 +305,12 @@ export default class LineItemModel extends Model {
             <p class="fragment">Single Source of Truth</p>
             <ul>
               <li class="fragment">the central repository of models in your application.               </li>
-              <li class="fragment">Routes and their corresponding controllers can ask the store for models, and the store is responsible for knowing how to fetch them</li>
+              <li class="fragment">Routes &  controllers can ask the store for models, and the store is responsible for knowing how to fetch them</li>
             </ul>
           </section>
           <section>
             <p class="yellow">Records</p>
-            <p class="fragment"> an instance of a model that contains data loaded from a server.</p>
+            <p class="fragment"> an instance of model that contains data loaded from server.</p>
             <pre class="fragment">
             <code>
 this.store.findRecord('person', 1); 
@@ -332,8 +332,8 @@ this.store.findRecord('person', 1);
             </section>
           <section>
             <p>Templating</p>
-            <p>Dynamic value interpolation in your HTML</p>
-            <pre>
+            <p class="fragment">Dynamic value interpolation in your HTML</p>
+            <pre class="fragment">
             <code>
             <script type="text/template">
               <p>My name is {{fullName}}</p>
@@ -451,20 +451,22 @@ Family Name: {{capitalize this.person.familyName}}
         <section>
           <p class="yellow">ember new</p>
           <p>
+          <pre>
           <code>
             ember new [project-name]
           </code>
+          </pre>
           </p>
-          <p class="fragment">
+          <pre class="fragment">
           <code>
             ember new my-project
           </code>
-          </p>
-          <p class="fragment">
+          </pre>
+          <pre class="fragment">
           <code>
             ember new my-project --yarn
           </code>
-          </p>
+          </pre>
         </section>
         <section>
           <p>Package Managers</p>
@@ -550,7 +552,7 @@ Family Name: {{capitalize this.person.familyName}}
           </pre>
         </section>
         <section>
-          <p>Code splitting</p>
+          <p class="yellow">Code splitting</p>
           <p class="fragment">Performance</p>
           <p class="fragment">Shipping unused code in the browser</p>
         </section>
